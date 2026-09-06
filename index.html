@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#050505" />
+  <meta name="description" content="VERSACE EROS — an experimental immersive 3D fragrance experience." />
+  <title>VERSACE EROS — Immersive 3D Experience</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <div id="loader" class="loader" aria-live="polite">
+    <div class="loader__mark">VERSACE EROS</div>
+    <div class="loader__line"><span></span></div>
+    <div class="loader__hint">ENTER THE SCENE</div>
+  </div>
+
+  <header class="nav" id="nav">
+    <a class="nav__brand" href="#hero" aria-label="Versace Eros home">VERSACE EROS</a>
+    <div class="nav__right">
+      <span class="nav__status"><i></i> IMMERSIVE EDITION</span>
+      <button class="sound" id="soundBtn" type="button" aria-label="Toggle ambient sound">SOUND OFF</button>
+    </div>
+  </header>
+
+  <main id="content">
+    <section class="scene-scroller" id="hero" aria-label="Immersive opening">
+      <div class="scene-pin">
+        <canvas id="webgl" aria-hidden="true"></canvas>
+
+        <div class="grain" aria-hidden="true"></div>
+        <div class="vignette" aria-hidden="true"></div>
+
+        <div class="scene-copy scene-copy--intro">
+          <p class="eyebrow">A FRAGRANCE EXPERIENCE / 01</p>
+          <h1>THE DOOR<br><em>IS CLOSED.</em></h1>
+          <p class="micro">Scroll to enter.</p>
+        </div>
+
+        <div class="scene-copy scene-copy--reveal">
+          <p class="eyebrow">THE REVEAL / 02</p>
+          <h2>STEP INTO<br><em>EROS.</em></h2>
+        </div>
+
+        <div class="scene-copy scene-copy--bottle">
+          <p class="eyebrow">VERSACE EROS / EAU DE TOILETTE</p>
+          <h2>YOUR<br><em>SCENT.</em></h2>
+        </div>
+
+        <div class="scene-progress" aria-hidden="true">
+          <span>SCROLL</span>
+          <div class="scene-progress__bar"><i></i></div>
+          <span id="progressText">00</span>
+        </div>
+
+        <div class="door-label" aria-hidden="true">EROS / 01</div>
+      </div>
+    </section>
+
+    <section class="editorial editorial--dark" id="essence">
+      <div class="editorial__inner">
+        <p class="eyebrow">02 / THE ESSENCE</p>
+        <h2>NOT A PRODUCT.<br><em>A PRESENCE.</em></h2>
+        <p class="editorial__body">A dark blue trail, warm woods and a signature freshness. The scene slows down so the bottle can speak for itself.</p>
+      </div>
+    </section>
+
+    <section class="notes" id="notes">
+      <div class="notes__head">
+        <p class="eyebrow">03 / THE NOTES</p>
+        <h2>THREE<br><em>LAYERS.</em></h2>
+      </div>
+      <div class="note-grid">
+        <article class="note-card">
+          <span>01</span>
+          <h3>TOP</h3>
+          <p>Lemon · Mint · Green Apple</p>
+        </article>
+        <article class="note-card">
+          <span>02</span>
+          <h3>HEART</h3>
+          <p>Tonka Bean · Geranium · Ambroxan</p>
+        </article>
+        <article class="note-card">
+          <span>03</span>
+          <h3>BASE</h3>
+          <p>Vanilla · Cedar · Oakmoss</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="closing" id="shop">
+      <div class="closing__halo" aria-hidden="true"></div>
+      <p class="eyebrow">04 / THE FINAL FRAME</p>
+      <h2>LEAVE<br><em>AN IMPRESSION.</em></h2>
+      <button class="cta" type="button">DISCOVER EROS <span>↗</span></button>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>VERSACE EROS / EXPERIMENTAL 3D EDITION</span>
+    <span>BUILT FOR SCROLL</span>
+  </footer>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
