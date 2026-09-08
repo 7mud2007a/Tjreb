@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: aurelis-cinematic
+    runtime: static
+    buildCommand: ''
+    staticPublishPath: .
+    pullRequestPreviewsEnabled: true

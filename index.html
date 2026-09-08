@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070707"><meta name="description" content="AURELIS — a cinematic 3D fragrance experience driven by scroll.">
+<title>AURELIS — The architecture of a scent</title>
+<link rel="preload" as="style" href="src/app.css"><link rel="stylesheet" href="src/app.css">
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}</script>
+</head>
+<body>
+<nav class="site-nav"><a class="brand" href="#top" aria-label="Aurelis home">AURELIS</a><div class="nav-meta mono"><span>NO. 01</span><a href="#story">THE SCENT</a></div></nav>
+<main id="top">
+<section class="hero" aria-labelledby="hero-title">
+ <div class="scene" aria-hidden="true"><div class="scene-frame"><canvas id="webgl"></canvas></div><div class="scene-vignette"></div></div>
+ <div class="shell hero-copy"><div class="mono eyebrow">An object of atmosphere</div><h1 id="hero-title"><span><em>A fragrance</em></span><span><em>you can orbit.</em></span></h1><p class="lede">AURELIS is built like a piece of architecture: glass, warm metal and a dark amber core. Scroll to move through it.</p></div>
+ <div class="scroll-cue mono" aria-hidden="true"><span>Scroll to descend</span><span class="scroll-line"></span></div>
+</section>
+
+<section class="chapter" id="story" aria-labelledby="story-title"><span class="number" aria-hidden="true">01</span><div class="shell grid"><div><div class="mono eyebrow reveal">THE SHELL</div><h2 id="story-title" class="reveal">The first thing you meet is the glass.</h2><div class="rule reveal"></div><p class="reveal">Nothing is hidden behind ornament. The vessel is the statement: a thick, cool envelope holding a warmer center. As you move, the profile changes before the copy does.</p></div><div class="mono reveal">TEMPERATURE / 08°C → 31°C<br>LIGHT / HARD → DIFFUSE<br>FORM / EXPOSED</div></div></section>
+
+<section class="material-stage" aria-labelledby="material-title"><div class="material-copy shell"><div><div class="mono eyebrow">02 / MATERIAL</div><h2 id="material-title" class="big">Warmth<br>inside.</h2></div><p class="note">The amber core only becomes obvious after the cold shell has done its job. Scroll further and the light follows it.</p></div></section>
+
+<section class="orbit-frame" aria-labelledby="orbit-title"><div class="orbit-copy"><div class="mono eyebrow">03 / THE ORBIT</div><h2 id="orbit-title">Follow the bottle.<br>Then lose it.</h2><p>The scene turns without asking for a mouse gesture. On touch devices it becomes a quieter, linear reveal so your thumb stays in control.</p></div></section>
+
+<section class="gallery" aria-labelledby="chapters-title"><div class="shell"><header class="gallery-head"><div class="mono eyebrow">04 / NOTES</div><h2 id="chapters-title">Four notes.<br>One trail.</h2></header><div class="track-wrap"><div class="track" role="list" aria-label="Fragrance notes"><article class="card" role="listitem"><div class="num mono">01 / AIR</div><h3>Cold iris, almost mineral.</h3><p>Clean lift. No sweetness yet.</p></article><article class="card" role="listitem"><div class="num mono">02 / HEAT</div><h3>Amber opens slowly.</h3><p>Warm skin, resin, polished wood.</p></article><article class="card" role="listitem"><div class="num mono">03 / SMOKE</div><h3>Violet leaf in the dark.</h3><p>A shadow crosses the middle.</p></article><article class="card" role="listitem"><div class="num mono">04 / AFTER</div><h3>Dry cedar stays behind.</h3><p>The room remembers it after you leave.</p></article></div></div></div></section>
+
+<section class="final" aria-labelledby="final-title"><div class="shell"><div class="mono eyebrow">05 / THE LAST FRAME</div><h2 id="final-title">Leave<br>something<br>behind.</h2><p>AURELIS No. 01 — 50 ml eau de parfum. Designed as an object first, a fragrance second.</p><a class="cta" href="#contact" aria-label="Reserve AURELIS No. 01"><span></span>Reserve No. 01</a></div></section>
+</main>
+<footer class="footer" id="contact"><span>AURELIS / 2026</span><span>BUILT FOR THE LONG TAKE</span></footer>
+<script type="module" src="src/app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>if(window.gsap){gsap.registerPlugin(ScrollTrigger);document.querySelectorAll('.hero h1 em').forEach((el,i)=>gsap.to(el,{y:0,opacity:1,duration:1.2,delay:.15+i*.11,ease:'power4.out'}));}</script>
+</body></html>
