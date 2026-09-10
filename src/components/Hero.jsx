@@ -1,11 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Phone, ArrowLeft, Sparkles, MapPin } from 'lucide-react';
+import { Phone, ArrowLeft, Sparkles, MapPin, ChevronDown } from 'lucide-react';
 import { brandInfo } from '../data/chocolateData';
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden bg-grain">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center pt-32 pb-20 overflow-hidden bg-grain">
       {/* Background Lighting Effects */}
       <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#D4AF37]/10 rounded-full blur-3xl pointer-events-none animate-pulse"></div>
       <div className="absolute bottom-1/3 left-1/4 w-[30rem] h-[30rem] bg-[#5A3826]/20 rounded-full blur-3xl pointer-events-none"></div>
@@ -49,18 +49,18 @@ export default function Hero() {
               href={brandInfo.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37] text-[#1A0F0B] font-bold text-lg hover:shadow-xl hover:shadow-[#D4AF37]/25 transition-all duration-300 flex items-center justify-center gap-3 transform hover:-translate-y-1"
+              className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37] text-[#1A0F0B] font-bold text-lg hover:shadow-xl hover:shadow-[#D4AF37]/25 transition-all duration-300 flex items-center justify-center gap-3 transform hover:-translate-y-1 active:scale-95"
             >
               <span>اطلب الآن</span>
               <ArrowLeft className="w-5 h-5" />
             </a>
 
             <a
-              href={`tel:${brandInfo.phoneRaw}`}
-              className="w-full sm:w-auto px-8 py-4 rounded-full border border-[#D4AF37]/40 bg-[#2A1810]/50 text-[#FAF6EE] hover:border-[#D4AF37] hover:bg-[#2A1810] font-semibold text-lg transition-all duration-300 flex items-center justify-center gap-3"
+              href="#gallery"
+              className="w-full sm:w-auto px-8 py-4 rounded-full border border-[#D4AF37]/40 bg-[#2A1810]/50 text-[#FAF6EE] hover:border-[#D4AF37] hover:bg-[#2A1810] font-semibold text-lg transition-all duration-300 flex items-center justify-center gap-3 active:scale-95"
             >
-              <Phone className="w-5 h-5 text-[#D4AF37]" />
-              <span>تواصل معنا ({brandInfo.phone})</span>
+              <span>استكشف مجموعتنا</span>
+              <ChevronDown className="w-5 h-5 text-[#D4AF37]" />
             </a>
           </div>
         </motion.div>

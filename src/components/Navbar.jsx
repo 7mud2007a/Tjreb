@@ -60,62 +60,74 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Actions Button */}
+        {/* Action Button */}
         <div className="hidden md:flex items-center gap-4">
           <a
             href={brandInfo.whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#D4AF37]/40 bg-[#2A1810]/40 text-sm font-medium text-[#F3E5AB] hover:bg-[#D4AF37] hover:text-[#1A0F0B] transition-all duration-300 shadow-lg hover:shadow-[#D4AF37]/20"
+            className="flex items-center gap-2 px-6 py-2.5 rounded-full border border-[#D4AF37]/40 bg-[#2A1810]/40 text-sm font-medium text-[#F3E5AB] hover:bg-[#D4AF37] hover:text-[#1A0F0B] transition-all duration-300 shadow-lg hover:shadow-[#D4AF37]/20"
           >
             <MessageCircle className="w-4 h-4" />
             <span>تواصل معنا</span>
           </a>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Hamburger Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 rounded-lg border border-[#D4AF37]/30 text-[#D4AF37] bg-[#2A1810]/60 focus:outline-none"
-          aria-label="Toggle Navigation Menu"
+          className="md:hidden p-3 rounded-full border border-[#D4AF37]/40 text-[#D4AF37] bg-[#2A1810]/80 focus:outline-none z-50 transition-transform active:scale-95"
+          aria-label="Toggle Fullscreen Menu"
         >
-          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
         </button>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Full-Screen Luxury Mobile Overlay Navigation */}
       {mobileMenuOpen && (
-        <div className="md:hidden glass-panel border-t border-[#D4AF37]/20 px-6 py-6 mt-4 animate-in fade-in slide-in-from-top-4 duration-300">
-          <nav className="flex flex-col gap-4">
-            {navLinks.map((link) => (
+        <div className="fixed inset-0 z-40 bg-[#140A07]/95 backdrop-blur-2xl flex flex-col justify-between p-8 sm:p-12 animate-in fade-in zoom-in-95 duration-300 md:hidden">
+          {/* Ambient Lighting */}
+          <div className="absolute top-1/4 right-10 w-72 h-72 bg-[#D4AF37]/10 rounded-full blur-3xl pointer-events-none"></div>
+
+          <div className="pt-16 space-y-2">
+            <span className="text-xs font-bold text-[#D4AF37] uppercase tracking-widest border border-[#D4AF37]/30 px-3 py-1 rounded-full">
+              القائمة الرئيسية
+            </span>
+          </div>
+
+          <nav className="flex flex-col gap-6 my-auto">
+            {navLinks.map((link, idx) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-lg font-medium text-[#FAF6EE] hover:text-[#D4AF37] transition-colors border-b border-[#FAF6EE]/5 pb-2"
+                className="text-3xl font-bold text-[#FAF6EE] hover:text-[#D4AF37] transition-colors font-arabic border-b border-[#D4AF37]/10 pb-3 flex items-center justify-between"
+                style={{ animationDelay: `${idx * 80}ms` }}
               >
-                {link.name}
+                <span>{link.name}</span>
+                <span className="text-xs font-mono text-[#D4AF37]/50">0{idx + 1}</span>
               </a>
             ))}
-            <div className="pt-4 flex flex-col gap-3">
-              <a
-                href={`tel:${brandInfo.phoneRaw}`}
-                className="flex items-center justify-center gap-2 py-3 rounded-xl border border-[#D4AF37]/30 bg-[#2A1810] text-[#D4AF37] text-sm font-semibold"
-              >
-                <Phone className="w-4 h-4" />
-                <span>إتصال: {brandInfo.phone}</span>
-              </a>
-              <a
-                href={brandInfo.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 py-3 rounded-xl bg-[#D4AF37] text-[#1A0F0B] text-sm font-bold shadow-lg"
-              >
-                <MessageCircle className="w-4 h-4" />
-                <span>تواصل عبر واتساب</span>
-              </a>
-            </div>
           </nav>
+
+          <div className="pt-6 border-t border-[#D4AF37]/20 space-y-4">
+            <a
+              href={`tel:${brandInfo.phoneRaw}`}
+              className="flex items-center justify-center gap-2 py-4 rounded-2xl border border-[#D4AF37]/40 bg-[#2A1810] text-[#D4AF37] font-bold text-base"
+            >
+              <Phone className="w-5 h-5" />
+              <span>اتصال: {brandInfo.phone}</span>
+            </a>
+            <a
+              href={brandInfo.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 py-4 rounded-2xl bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37] text-[#1A0F0B] font-extrabold text-base shadow-xl"
+            >
+              <MessageCircle className="w-5 h-5" />
+              <span>تواصل عبر واتساب</span>
+            </a>
+          </div>
         </div>
       )}
     </header>
