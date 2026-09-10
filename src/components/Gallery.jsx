@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Maximize2, Sparkles } from 'lucide-react';
 import { galleryItems } from '../data/chocolateData';
+import Carousel3D from './Carousel3D';
 import Lightbox from './Lightbox';
 
 export default function Gallery() {
@@ -46,7 +47,7 @@ export default function Gallery() {
         </div>
 
         {/* Category Filters */}
-        <div className="flex flex-wrap items-center justify-center gap-3 mb-12">
+        <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
           {categories.map((cat) => (
             <button
               key={cat}
@@ -62,7 +63,15 @@ export default function Gallery() {
           ))}
         </div>
 
-        {/* Gallery Grid */}
+        {/* 3D Perspective Carousel Experience */}
+        <div className="mb-16">
+          <Carousel3D
+            items={filteredItems}
+            onSelect={(item, index) => openLightbox(index)}
+          />
+        </div>
+
+        {/* Grid View */}
         <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {filteredItems.map((item, index) => (
             <motion.div

@@ -54,10 +54,20 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom copyright */}
+        {/* Bottom copyright and developer credit */}
         <div className="pt-8 border-t border-[#FAF6EE]/10 flex flex-col sm:flex-row items-center justify-between text-xs text-[#FAF6EE]/50 gap-4">
           <p>© {currentYear} {brandInfo.name}. جميع الحقوق محفوظة.</p>
-          <p>تصميم وتنفيذ بمواصفات عالمية فاخرة</p>
+          <p>
+            تصميم وتطوير{' '}
+            <a
+              href="https://aboudweb.onrender.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#D4AF37] hover:underline font-semibold"
+            >
+              Aboud Web
+            </a>
+          </p>
         </div>
       </div>
     </footer>
