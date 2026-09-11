@@ -1,73 +1,77 @@
-import React from 'react';
-import { Phone, MapPin } from 'lucide-react';
-import { brandInfo } from '../data/chocolateData';
+import { ArrowUpLeft, MapPin, Phone } from "lucide-react";
+import { brandInfo } from "../data/chocolateData";
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
   return (
-    <footer className="bg-[#140A07] border-t border-[#D4AF37]/20 pt-16 pb-8 text-[#FAF6EE]/80">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 space-y-12">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-          {/* Brand Info */}
-          <div className="md:col-span-5 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full border border-[#D4AF37]/40 flex items-center justify-center bg-[#2A1810]">
-                <span className="gold-text-gradient font-bold text-xl">غ</span>
-              </div>
-              <span className="font-bold text-2xl gold-text-gradient font-arabic">
-                {brandInfo.name}
-              </span>
-            </div>
-            <p className="text-sm text-[#FAF6EE]/70 max-w-sm leading-relaxed">
-              {brandInfo.description}
+    <footer className="border-t border-[#FFDB94]/10 bg-[#241006]">
+      <div className="mx-auto max-w-7xl px-5 py-12 sm:px-8 lg:px-10">
+        <div className="grid gap-10 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
+
+          <div className="text-right">
+            <p className="text-lg font-medium text-[#FFF7E8]">
+              {brandInfo.name}
+            </p>
+
+            <p className="mt-2 text-[9px] tracking-[0.25em] text-[#FFDB94]/50">
+              HAUTE CHOCOLATERIE
+            </p>
+
+            <p className="mt-5 max-w-sm mr-auto text-xs leading-7 text-[#D8C8AE]/60">
+              شوكولا فاخرة بتفاصيل تليق بمناسباتكم وهداياكم.
             </p>
           </div>
 
-          {/* Quick Links */}
-          <div className="md:col-span-3 space-y-3">
-            <h4 className="text-base font-bold text-[#D4AF37]">روابط السريعة</h4>
-            <ul className="space-y-2 text-sm">
-              <li><a href="#hero" className="hover:text-[#D4AF37] transition-colors">الرئيسية</a></li>
-              <li><a href="#why-us" className="hover:text-[#D4AF37] transition-colors">من نحن</a></li>
-              <li><a href="#services" className="hover:text-[#D4AF37] transition-colors">خدماتنا</a></li>
-              <li><a href="#occasions" className="hover:text-[#D4AF37] transition-colors">المناسبات</a></li>
-              <li><a href="#gallery" className="hover:text-[#D4AF37] transition-colors">المعرض</a></li>
-            </ul>
+          <div className="text-right">
+            <p className="mb-4 text-xs text-[#FFDB94]">تواصل</p>
+
+            <a
+              href={`tel:${brandInfo.phoneRaw}`}
+              className="mb-3 flex items-center justify-end gap-3 text-xs text-[#D8C8AE]/70 transition hover:text-[#FFDB94]"
+            >
+              {brandInfo.phone}
+              <Phone size={14} strokeWidth={1.5} />
+            </a>
+
+            <a
+              href={brandInfo.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-end gap-3 text-xs text-[#D8C8AE]/70 transition hover:text-[#FFDB94]"
+            >
+              واتساب
+              <ArrowUpLeft size={14} strokeWidth={1.5} />
+            </a>
           </div>
 
-          {/* Contact info */}
-          <div className="md:col-span-4 space-y-3">
-            <h4 className="text-base font-bold text-[#D4AF37]">معلومات الفرع</h4>
-            <div className="space-y-2 text-sm text-[#FAF6EE]/80">
-              <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-[#D4AF37]" />
-                <span>{brandInfo.location}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-[#D4AF37]" />
-                <a href={`tel:${brandInfo.phoneRaw}`} className="hover:text-[#D4AF37]">
-                  {brandInfo.phone}
-                </a>
-              </div>
+          <div className="text-right">
+            <p className="mb-4 text-xs text-[#FFDB94]">الموقع</p>
+
+            <div className="flex items-start justify-end gap-3 text-xs leading-6 text-[#D8C8AE]/70">
+              <span>{brandInfo.location}</span>
+              <MapPin
+                size={15}
+                className="mt-1 shrink-0 text-[#FFDB94]/70"
+                strokeWidth={1.5}
+              />
             </div>
           </div>
         </div>
 
-        {/* Bottom copyright and developer credit */}
-        <div className="pt-8 border-t border-[#FAF6EE]/10 flex flex-col sm:flex-row items-center justify-between text-xs text-[#FAF6EE]/50 gap-4">
-          <p>© {currentYear} {brandInfo.name}. جميع الحقوق محفوظة.</p>
-          <p>
-            تصميم وتطوير{' '}
-            <a
-              href="https://aboudweb.onrender.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#D4AF37] hover:underline font-semibold"
-            >
-              Aboud Web
-            </a>
+        <div className="my-8 soft-divider" />
+
+        <div className="flex flex-col items-center justify-between gap-3 text-center sm:flex-row">
+          <p className="text-[10px] text-[#D8C8AE]/40">
+            © {new Date().getFullYear()} {brandInfo.name}. جميع الحقوق محفوظة.
           </p>
+
+          <a
+            href="https://aboudweb.onrender.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[10px] text-[#D8C8AE]/45 transition hover:text-[#FFDB94]"
+          >
+            تصميم وتطوير Aboud Web
+          </a>
         </div>
       </div>
     </footer>
