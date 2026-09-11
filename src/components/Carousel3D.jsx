@@ -1,144 +1,181 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { ChevronRight, ChevronLeft, Sparkles } from 'lucide-react';
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-export default function Carousel3D({ items = [], onSelect }) {
+export default function Carousel3D({ items = [] }) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const touchStartX = useRef(0);
-  const touchEndX = useRef(0);
 
-  const nextSlide = () => {
-    setActiveIndex((prev) => (prev + 1) % items.length);
+  const total = items.length;
+
+  const next = () => {
+    if (!total) return;
+    setActiveIndex((current) => (current + 1) % total);
   };
 
-  const prevSlide = () => {
-    setActiveIndex((prev) => (prev - 1 + items.length) % items.length);
+  const previous = () => {
+    if (!total) return;
+    setActiveIndex((current) => (current - 1 + total) % total);
   };
 
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'ArrowRight') nextSlide();
-      if (e.key === 'ArrowLeft') prevSlide();
+    const handleKeyDown = (event) => {
+      if (event.key === "ArrowLeft") previous();
+      if (event.key === "ArrowRight") next();
     };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [items.length]);
 
-  const handleTouchStart = (e) => {
-    touchStartX.current = e.touches[0].clientX;
-  };
+    window.addEventListener("keydown", handleKeyDown);
 
-  const handleTouchMove = (e) => {
-    touchEndX.current = e.touches[0].clientX;
-  };
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [total]);
 
-  const handleTouchEnd = () => {
-    const diff = touchStartX.current - touchEndX.current;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) nextSlide();
-      else prevSlide();
-    }
-  };
-
-  if (!items || items.length === 0) return null;
+  if (!items.length) return null;
 
   return (
-    <div className="relative w-full max-w-5xl mx-auto py-12 px-4 select-none">
-      {/* 3D Perspective Viewport */}
+    <div className="relative w-full select-none">
+      {/* 3D Stage */}
       <div
-        className="relative h-[420px] sm:h-[480px] w-full flex items-center justify-center perspective-[1200px] overflow-hidden"
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
+        className="relative mx-auto h-[390px] w-full max-w-6xl overflow-hidden sm:h-[470px]"
+        style={{
+          perspective: "1400px",
+        }}
       >
-        {items.map((item, index) => {
-          let offset = index - activeIndex;
-          if (offset < -Math.floor(items.length / 2)) offset += items.length;
-          if (offset > Math.floor(items.length / 2)) offset -= items.length;
+        <div className="absolute inset-0 flex items-center justify-center">
+          {items.map((item, index) => {
+            let offset = index - activeIndex;
 
-          const isActive = offset === 0;
-          const isAbsOne = Math.abs(offset) === 1;
+            if (offset > total / 2) offset -= total;
+            if (offset < -total / 2) offset += total;
 
-          // Calculate 3D Card Transforms
-          const translateX = offset * 220; // horizontal spacing in px
-          const translateZ = isActive ? 0 : -250;
-          const rotateY = offset * -20; // subtle Y axis rotation
-          const scale = isActive ? 1 : 0.82;
-          const opacity = isActive ? 1 : isAbsOne ? 0.6 : 0;
-          const zIndex = 20 - Math.abs(offset) * 5;
+            const isActive = offset === 0;
+            const isNear = Math.abs(offset) === 1;
+            const isVisible = Math.abs(offset) <= 2;
 
-          return (
-            <div
-              key={item.id || index}
-              onClick={() => {
-                setActiveIndex(index);
-                if (isActive && onSelect) onSelect(item, index);
-              }}
-              style={{
-                transform: `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`,
-                opacity: opacity,
-                zIndex: zIndex,
-                transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
-              }}
-              className={`absolute top-0 w-[280px] sm:w-[340px] h-[380px] sm:h-[440px] rounded-3xl overflow-hidden cursor-pointer border ${
-                isActive
-                  ? 'border-[#D4AF37] shadow-[0_20px_50px_rgba(212,175,55,0.25)]'
-                  : 'border-[#D4AF37]/20 shadow-2xl backdrop-blur-sm'
-              } bg-[#2A1810] group`}
-            >
-              <img
-                src={item.image}
-                alt={item.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1A0F0B] via-[#1A0F0B]/30 to-transparent"></div>
+            const translateX =
+              offset === 0
+                ? 0
+                : offset > 0
+                  ? 250 + Math.min(offset - 1, 1) * 80
+                  : -250 - Math.min(Math.abs(offset) - 1, 1) * 80;
 
-              {/* Card Label & Tag */}
-              <div className="absolute bottom-6 left-6 right-6 space-y-2">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-[#D4AF37] bg-[#1A0F0B]/80 border border-[#D4AF37]/30 backdrop-blur-md">
-                  <Sparkles className="w-3 h-3 text-[#D4AF37]" />
-                  <span>{item.category}</span>
-                </span>
-                <h3 className="text-xl font-bold text-[#FAF6EE] font-arabic leading-snug">
-                  {item.title}
-                </h3>
-              </div>
-            </div>
-          );
-        })}
+            const translateZ = isActive
+              ? 80
+              : isNear
+                ? -80
+                : -280;
+
+            const rotateY =
+              offset === 0
+                ? 0
+                : offset > 0
+                  ? -22
+                  : 22;
+
+            const scale = isActive
+              ? 1
+              : isNear
+                ? 0.78
+                : 0.58;
+
+            return (
+              <motion.button
+                key={item.id || item.src || index}
+                type="button"
+                onClick={() => setActiveIndex(index)}
+                initial={false}
+                animate={{
+                  x: translateX,
+                  z: translateZ,
+                  rotateY,
+                  scale,
+                  opacity: isActive
+                    ? 1
+                    : isNear
+                      ? 0.58
+                      : isVisible
+                        ? 0.18
+                        : 0,
+                  filter: isActive
+                    ? "brightness(1)"
+                    : "brightness(.55)",
+                }}
+                transition={{
+                  duration: 0.75,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className={`absolute h-[300px] w-[220px] overflow-hidden rounded-[24px] border bg-[#241006] sm:h-[390px] sm:w-[285px] ${
+                  isActive
+                    ? "border-[#FFDB94]/35 shadow-[0_30px_80px_rgba(0,0,0,.4)]"
+                    : "border-[#FFDB94]/10"
+                }`}
+                style={{
+                  transformStyle: "preserve-3d",
+                  pointerEvents: isVisible ? "auto" : "none",
+                }}
+              >
+                <img
+                  src={item.src || item.image}
+                  alt={item.alt || item.title || "شوكولا غراوي"}
+                  className="h-full w-full object-cover"
+                  draggable="false"
+                />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-[#241006]/70 via-transparent to-transparent" />
+
+                {isActive && item.title && (
+                  <div className="absolute bottom-4 right-4 left-4 text-right">
+                    <div className="glass-strong rounded-xl px-4 py-3">
+                      <p className="text-sm text-[#FFF7E8]">
+                        {item.title}
+                      </p>
+
+                      {item.category && (
+                        <p className="mt-1 text-[10px] text-[#FFDB94]/60">
+                          {item.category}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </motion.button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Controls */}
-      <div className="flex items-center justify-center gap-6 mt-6">
+      <div className="mt-5 flex items-center justify-center gap-3">
         <button
-          onClick={prevSlide}
-          className="p-3 rounded-full bg-[#2A1810] border border-[#D4AF37]/40 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#1A0F0B] transition-all shadow-lg"
-          aria-label="Previous Slide"
+          type="button"
+          onClick={previous}
+          aria-label="الصورة السابقة"
+          className="glass flex h-10 w-10 items-center justify-center rounded-xl text-[#FFDB94] transition hover:bg-[#FFDB94]/10"
         >
-          <ChevronRight className="w-6 h-6" />
+          <ChevronRight size={17} strokeWidth={1.5} />
         </button>
 
-        {/* Indicators */}
-        <div className="flex items-center gap-2">
-          {items.map((_, idx) => (
+        <div className="flex items-center gap-1.5">
+          {items.map((_, index) => (
             <button
-              key={idx}
-              onClick={() => setActiveIndex(idx)}
-              className={`h-2.5 rounded-full transition-all duration-300 ${
-                activeIndex === idx
-                  ? 'w-8 bg-[#D4AF37]'
-                  : 'w-2.5 bg-[#D4AF37]/30 hover:bg-[#D4AF37]/60'
+              key={index}
+              type="button"
+              onClick={() => setActiveIndex(index)}
+              aria-label={`الصورة ${index + 1}`}
+              className={`h-1.5 rounded-full transition-all duration-500 ${
+                index === activeIndex
+                  ? "w-7 bg-[#FFDB94]"
+                  : "w-1.5 bg-[#FFDB94]/25"
               }`}
-              aria-label={`Go to slide ${idx + 1}`}
             />
           ))}
         </div>
 
         <button
-          onClick={nextSlide}
-          className="p-3 rounded-full bg-[#2A1810] border border-[#D4AF37]/40 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#1A0F0B] transition-all shadow-lg"
-          aria-label="Next Slide"
+          type="button"
+          onClick={next}
+          aria-label="الصورة التالية"
+          className="glass flex h-10 w-10 items-center justify-center rounded-xl text-[#FFDB94] transition hover:bg-[#FFDB94]/10"
         >
-          <ChevronLeft className="w-6 h-6" />
+          <ChevronLeft size={17} strokeWidth={1.5} />
         </button>
       </div>
     </div>
