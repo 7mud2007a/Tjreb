@@ -1,86 +1,149 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { HeartHandshake, Sparkles, Cake, Gift, PartyPopper, Palette, ArrowUpLeft } from 'lucide-react';
-import { services, brandInfo } from '../data/chocolateData';
+import { motion } from "framer-motion";
+import {
+  Gift,
+  Heart,
+  Cake,
+  Sparkles,
+  Package,
+  UtensilsCrossed,
+} from "lucide-react";
+
+const services = [
+  {
+    icon: Sparkles,
+    title: "تشكيلات فاخرة",
+    text: "شوكولا مختارة بتنسيقات أنيقة.",
+    image:
+      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=85",
+  },
+  {
+    icon: Gift,
+    title: "هدايا خاصة",
+    text: "هدية بتفاصيل مصممة لمن تهديهم.",
+    image:
+      "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=900&q=85",
+  },
+  {
+    icon: Heart,
+    title: "توزيعات المناسبات",
+    text: "توزيعات أنيقة للأفراح والمناسبات.",
+    image:
+      "https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=900&q=85",
+  },
+  {
+    icon: Cake,
+    title: "أعياد الميلاد",
+    text: "لمسات شوكولا تضيف فرحاً للتفاصيل.",
+    image:
+      "https://images.unsplash.com/photo-1575377427642-087cf684f04d?auto=format&fit=crop&w=900&q=85",
+  },
+  {
+    icon: Package,
+    title: "طلبات خاصة",
+    text: "ننفذ أفكاركم بتنسيق يخصكم.",
+    image:
+      "https://images.unsplash.com/photo-1548907040-4d42bfc2a2f8?auto=format&fit=crop&w=900&q=85",
+  },
+  {
+    icon: UtensilsCrossed,
+    title: "ضيافة المناسبات",
+    text: "تشكيلات مميزة لضيوفكم.",
+    image:
+      "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?auto=format&fit=crop&w=900&q=85",
+  },
+];
 
 export default function Services() {
-  const iconMap = {
-    HeartHandshake,
-    Sparkles,
-    Cake,
-    Gift,
-    PartyPopper,
-    Palette,
-  };
-
   return (
-    <section id="services" className="py-24 relative bg-[#1A0F0B]">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 relative z-10">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <span className="text-xs font-bold tracking-widest text-[#D4AF37] uppercase border border-[#D4AF37]/30 px-4 py-1.5 rounded-full bg-[#2A1810]/50">
-            خدماتنا الفاخرة
-          </span>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-[#FAF6EE] font-arabic">
-            لمسات سحرية لكل <span className="gold-text-gradient">مناسبة</span>
-          </h2>
-          <p className="text-[#FAF6EE]/70 text-base sm:text-lg leading-relaxed">
-            من الأفراح الكبيرة إلى الهدايا الشخصية، نقدم تشكيلات متميزة ومصممة خصيصاً لتلبي أرقى الأذواق.
-          </p>
-        </div>
+    <section
+      id="services"
+      className="section-space relative overflow-hidden bg-[#241006]"
+    >
+      <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div
+          initial={{ opacity: 0, x: 35 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-12 text-right"
+        >
+          <div className="mb-4 flex items-center justify-end gap-3">
+            <span className="h-px w-8 bg-[#FFDB94]/40" />
+
+            <span className="text-[10px] tracking-[0.2em] text-[#FFDB94]/65">
+              OUR SERVICES
+            </span>
+          </div>
+
+          <h2 className="text-3xl font-medium text-[#FFF7E8] sm:text-4xl lg:text-5xl">
+            نصنعها
+            <span className="text-[#FFDB94]"> كما تتخيلها</span>
+          </h2>
+
+          <p className="mt-4 max-w-xl mr-auto text-sm leading-7 text-[#D8C8AE]/70">
+            من التشكيلات الفاخرة إلى التفاصيل المصممة خصيصاً لمناسبتكم.
+          </p>
+        </motion.div>
+
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => {
-            const IconComponent = iconMap[service.icon] || Sparkles;
+            const Icon = service.icon;
+
             return (
-              <motion.div
-                key={service.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group relative rounded-3xl overflow-hidden glass-card border border-[#D4AF37]/20 flex flex-col justify-between"
+              <motion.article
+                key={service.title}
+                initial={{
+                  opacity: 0,
+                  scale: 0.92,
+                  x: index % 2 === 0 ? 25 : -25,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  scale: 1,
+                  x: 0,
+                }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{
+                  duration: 0.7,
+                  delay: index * 0.06,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className="group relative overflow-hidden rounded-2xl border border-[#FFDB94]/10 bg-[#3A1607]/45"
               >
-                {/* Image background wrapper */}
-                <div className="relative h-56 overflow-hidden">
+                <div className="relative h-44 overflow-hidden">
                   <img
                     src={service.image}
                     alt={service.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#1A0F0B] via-[#1A0F0B]/40 to-transparent"></div>
 
-                  {/* Category Badge Icon */}
-                  <div className="absolute top-4 right-4 w-12 h-12 rounded-2xl glass-panel border border-[#D4AF37]/40 flex items-center justify-center text-[#D4AF37]">
-                    <IconComponent className="w-6 h-6" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#241006] via-[#241006]/15 to-transparent" />
+
+                  <div className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-xl border border-[#FFDB94]/20 bg-[#241006]/45 text-[#FFDB94] backdrop-blur-md">
+                    <Icon size={17} strokeWidth={1.5} />
                   </div>
                 </div>
 
-                {/* Content */}
-                <div className="p-8 space-y-4 flex-1 flex flex-col justify-between">
-                  <div className="space-y-3">
-                    <h3 className="text-2xl font-bold text-[#FAF6EE] group-hover:text-[#D4AF37] transition-colors">
-                      {service.title}
-                    </h3>
-                    <p className="text-sm text-[#FAF6EE]/75 leading-relaxed font-light">
-                      {service.description}
-                    </p>
-                  </div>
+                <div className="px-5 pb-5 pt-4 text-right">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <h3 className="text-sm font-medium text-[#FFF7E8]">
+                        {service.title}
+                      </h3>
 
-                  <div className="pt-4 border-t border-[#D4AF37]/10 flex items-center justify-between">
-                    <a
-                      href={brandInfo.whatsappUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-[#D4AF37] hover:text-[#F3E5AB] transition-colors"
-                    >
-                      <span>استفسر الآن</span>
-                      <ArrowUpLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1" />
-                    </a>
+                      <p className="mt-1.5 text-xs leading-6 text-[#D8C8AE]/65">
+                        {service.text}
+                      </p>
+                    </div>
+
+                    <span className="pt-0.5 text-[9px] text-[#FFDB94]/25">
+                      0{index + 1}
+                    </span>
                   </div>
                 </div>
-              </motion.div>
+              </motion.article>
             );
           })}
         </div>
