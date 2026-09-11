@@ -1,104 +1,129 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Phone, ArrowLeft, Sparkles, MapPin, ChevronDown } from 'lucide-react';
-import { brandInfo } from '../data/chocolateData';
+import { motion } from "framer-motion";
+import { ArrowUpLeft, MapPin } from "lucide-react";
+import { brandInfo } from "../data/chocolateData";
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center pt-32 pb-20 overflow-hidden bg-grain">
-      {/* Background Lighting Effects */}
-      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#D4AF37]/10 rounded-full blur-3xl pointer-events-none animate-pulse"></div>
-      <div className="absolute bottom-1/3 left-1/4 w-[30rem] h-[30rem] bg-[#5A3826]/20 rounded-full blur-3xl pointer-events-none"></div>
+    <section
+      id="hero"
+      className="relative min-h-[100svh] overflow-hidden bg-[#241006]"
+    >
+      {/* Background */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(99,39,9,0.5),transparent_45%)]" />
+        <div className="absolute inset-0 bg-gradient-to-l from-[#241006]/30 via-[#241006]/60 to-[#241006]" />
+      </div>
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 relative z-10 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        {/* Text Content */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="lg:col-span-7 space-y-6 text-center lg:text-right"
-        >
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#D4AF37]/30 bg-[#2A1810]/60 text-xs font-semibold text-[#D4AF37] backdrop-blur-md">
-            <Sparkles className="w-4 h-4 text-[#D4AF37]" />
-            <span>شوكولا فاخرة مصنوعة يدويًا في سوريا</span>
-          </div>
+      <div className="relative mx-auto flex min-h-[100svh] max-w-7xl items-center px-5 pb-12 pt-28 sm:px-8 lg:px-10">
+        <div className="grid w-full items-center gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
 
-          {/* Title */}
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-tight text-[#FAF6EE] font-arabic">
-            تذوّق الفخامة مع <br />
-            <span className="gold-text-gradient underline decoration-[#D4AF37]/30 underline-offset-8">
-              {brandInfo.name}
-            </span>
-          </h1>
+          {/* Text */}
+          <motion.div
+            initial={{ opacity: 0, x: 45 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{
+              duration: 0.9,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+            className="order-2 text-right lg:order-1"
+          >
+            <div className="mb-6 flex items-center justify-end gap-3">
+              <span className="h-px w-8 bg-[#FFDB94]/40" />
+              <span className="text-[10px] tracking-[0.16em] text-[#FFDB94]/70">
+                شوكولا فاخرة مصنوعة بعناية
+              </span>
+            </div>
 
-          {/* Subtitle */}
-          <p className="text-lg sm:text-xl text-[#FAF6EE]/80 max-w-2xl leading-relaxed font-light">
-            {brandInfo.description}
-          </p>
+            <h1 className="max-w-xl text-4xl font-medium leading-[1.15] tracking-tight text-[#FFF7E8] sm:text-5xl lg:text-6xl">
+              الفخامة
+              <br />
+              <span className="text-[#FFDB94]">التي تُهدى</span>
+            </h1>
 
-          {/* Location details badge */}
-          <div className="flex items-center justify-center lg:justify-start gap-2 text-sm text-[#D4AF37]/90 pt-2">
-            <MapPin className="w-4 h-4" />
-            <span>{brandInfo.location}</span>
-          </div>
+            <p className="mt-7 max-w-lg text-sm leading-8 text-[#D8C8AE] sm:text-base">
+              نصنع تفاصيل الشوكولا بعناية، لتبقى مناسباتكم أجمل في الذاكرة.
+            </p>
 
-          {/* CTA Buttons */}
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-            <a
-              href={brandInfo.whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37] text-[#1A0F0B] font-bold text-lg hover:shadow-xl hover:shadow-[#D4AF37]/25 transition-all duration-300 flex items-center justify-center gap-3 transform hover:-translate-y-1 active:scale-95"
-            >
-              <span>اطلب الآن</span>
-              <ArrowLeft className="w-5 h-5" />
-            </a>
+            <div className="mt-6 flex items-center justify-end gap-2 text-xs text-[#D8C8AE]/80">
+              <MapPin size={14} className="text-[#FFDB94]" strokeWidth={1.5} />
+              <span>{brandInfo.location}</span>
+            </div>
 
-            <a
-              href="#gallery"
-              className="w-full sm:w-auto px-8 py-4 rounded-full border border-[#D4AF37]/40 bg-[#2A1810]/50 text-[#FAF6EE] hover:border-[#D4AF37] hover:bg-[#2A1810] font-semibold text-lg transition-all duration-300 flex items-center justify-center gap-3 active:scale-95"
-            >
-              <span>استكشف مجموعتنا</span>
-              <ChevronDown className="w-5 h-5 text-[#D4AF37]" />
-            </a>
-          </div>
-        </motion.div>
+            <div className="mt-8 flex flex-wrap justify-end gap-3">
+              <a
+                href={brandInfo.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-button glass-button-primary text-xs sm:text-sm"
+              >
+                اطلب الآن
+                <ArrowUpLeft size={16} strokeWidth={1.7} />
+              </a>
 
-        {/* Hero Visual Imagery */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-          className="lg:col-span-5 relative"
-        >
-          <div className="relative mx-auto max-w-md lg:max-w-none">
-            {/* Ambient Backglow */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-[#D4AF37]/20 to-transparent rounded-3xl blur-2xl transform rotate-3"></div>
+              <a
+                href="#gallery"
+                className="glass-button text-xs sm:text-sm"
+              >
+                استكشف التشكيلة
+              </a>
+            </div>
+          </motion.div>
 
-            {/* Main Featured Image Card */}
-            <div className="relative rounded-3xl overflow-hidden border border-[#D4AF37]/30 shadow-2xl bg-[#2A1810]">
+          {/* Hero Image */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92, x: -35 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            transition={{
+              duration: 1.1,
+              delay: 0.12,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+            className="order-1 lg:order-2"
+          >
+            <div className="cinematic-image relative mx-auto aspect-[4/5] w-full max-w-[620px] overflow-hidden rounded-[28px] border border-[#FFDB94]/15 sm:rounded-[34px]">
               <img
-                src="https://images.unsplash.com/photo-1548907040-4baa42d10919?q=80&w=1200&auto=format&fit=crop"
-                alt="شوكولا غراوي الفاخرة"
-                className="w-full h-[450px] object-cover hover:scale-105 transition-transform duration-700 ease-out"
+                src="https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=1400&q=90"
+                alt="تشكيلة شوكولا فاخرة من شوكولا غراوي"
+                className="h-full w-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1A0F0B] via-transparent to-transparent opacity-80"></div>
 
-              {/* Floating Highlight Card */}
-              <div className="absolute bottom-6 right-6 left-6 p-4 rounded-2xl glass-panel border border-[#D4AF37]/30 flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#D4AF37] to-[#997A15] flex items-center justify-center text-[#1A0F0B] font-bold text-xl shadow-lg shrink-0">
-                  غ
-                </div>
-                <div>
-                  <h4 className="font-bold text-[#FAF6EE] text-base">جودة وصنعة يدوية عالية</h4>
-                  <p className="text-xs text-[#D4AF37]/90">تصاميم شوكولا ملكية لمختلف المناسبات</p>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#241006]/75 via-transparent to-[#241006]/10" />
+
+              <div className="absolute bottom-5 left-5 right-5 sm:bottom-7 sm:left-7 sm:right-7">
+                <div className="glass-strong rounded-2xl px-4 py-3 sm:px-5 sm:py-4">
+                  <div className="flex items-center justify-between gap-4">
+                    <div>
+                      <p className="text-[9px] tracking-[0.2em] text-[#FFDB94]/60">
+                        GHRAOUI
+                      </p>
+                      <p className="mt-1 text-sm text-[#FFF7E8]">
+                        تفاصيل تستحق أن تُهدى
+                      </p>
+                    </div>
+
+                    <span className="text-lg text-[#FFDB94]/70">
+                      ✦
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+
+        </div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.a
+        href="#why-us"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.1, duration: 0.6 }}
+        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 items-center gap-3 text-[9px] tracking-[0.25em] text-[#D8C8AE]/50 sm:flex"
+      >
+        SCROLL
+        <span className="h-px w-8 bg-[#FFDB94]/30" />
+      </motion.a>
     </section>
   );
 }
