@@ -1,75 +1,99 @@
-import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, ChevronRight, ChevronLeft } from 'lucide-react';
+import { useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, ArrowLeft, ArrowRight } from "lucide-react";
 
-export default function Lightbox({ image, onClose, onPrev, onNext }) {
-  if (!image) return null;
+export default function Lightbox({
+  image,
+  onClose,
+  onPrev,
+  onNext,
+}) {
+  useEffect(() => {
+    if (!image) return;
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") onClose?.();
+      if (event.key === "ArrowLeft") onNext?.();
+      if (event.key === "ArrowRight") onPrev?.();
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [image, onClose, onNext, onPrev]);
 
   return (
     <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-lg"
-        onClick={onClose}
-      >
-        <button
-          onClick={onClose}
-          className="absolute top-6 left-6 p-3 rounded-full bg-[#2A1810]/80 border border-[#D4AF37]/40 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#1A0F0B] transition-all z-50"
-          aria-label="Close Lightbox"
-        >
-          <X className="w-6 h-6" />
-        </button>
-
-        {/* Navigation Buttons */}
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onPrev();
-          }}
-          className="absolute right-6 top-1/2 -translate-y-1/2 p-3 rounded-full bg-[#2A1810]/80 border border-[#D4AF37]/40 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#1A0F0B] transition-all z-50"
-          aria-label="Previous Image"
-        >
-          <ChevronRight className="w-6 h-6" />
-        </button>
-
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onNext();
-          }}
-          className="absolute left-6 top-1/2 -translate-y-1/2 p-3 rounded-full bg-[#2A1810]/80 border border-[#D4AF37]/40 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#1A0F0B] transition-all z-50"
-          aria-label="Next Image"
-        >
-          <ChevronLeft className="w-6 h-6" />
-        </button>
-
-        {/* Modal Image Card */}
+      {image && (
         <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.9, opacity: 0 }}
-          onClick={(e) => e.stopPropagation()}
-          className="relative max-w-4xl max-h-[85vh] rounded-3xl overflow-hidden border border-[#D4AF37]/30 bg-[#1A0F0B] shadow-2xl flex flex-col"
+          className="fixed inset-0 z-[200] flex items-center justify-center bg-[#160902]/92 p-4 backdrop-blur-xl"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
         >
-          <img
-            src={image.image}
-            alt={image.title}
-            className="w-full max-h-[70vh] object-contain bg-black/50"
-          />
-          <div className="p-6 bg-[#2A1810] border-t border-[#D4AF37]/20 flex items-center justify-between">
-            <div>
-              <span className="text-xs font-semibold text-[#D4AF37] uppercase tracking-wider">
-                {image.category}
-              </span>
-              <h3 className="text-xl font-bold text-[#FAF6EE] mt-1 font-arabic">
-                {image.title}
-              </h3>
-            </div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.94 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="relative max-h-[90vh] max-w-5xl overflow-hidden rounded-[24px] border border-[#FFDB94]/20 bg-[#241006] shadow-2xl"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <img
+              src={image.src || image.image}
+              alt={image.alt || image.title || "شوكولا غراوي"}
+              className="max-h-[78vh] w-auto max-w-[90vw] object-contain"
+            />
+
+            {image.title && (
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#241006] to-transparent px-5 pb-5 pt-14 text-right">
+                <p className="text-sm text-[#FFF7E8]">{image.title}</p>
+                {image.category && (
+                  <p className="mt-1 text-[10px] text-[#FFDB94]/60">
+                    {image.category}
+                  </p>
+                )}
+              </div>
+            )}
+
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="إغلاق"
+              className="glass absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-xl text-[#FFDB94]"
+            >
+              <X size={18} strokeWidth={1.5} />
+            </button>
+
+            {onPrev && (
+              <button
+                type="button"
+                onClick={onPrev}
+                aria-label="الصورة السابقة"
+                className="glass absolute left-4 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-xl text-[#FFDB94]"
+              >
+                <ArrowLeft size={18} strokeWidth={1.5} />
+              </button>
+            )}
+
+            {onNext && (
+              <button
+                type="button"
+                onClick={onNext}
+                aria-label="الصورة التالية"
+                className="glass absolute right-4 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-xl text-[#FFDB94]"
+              >
+                <ArrowRight size={18} strokeWidth={1.5} />
+              </button>
+            )}
+          </motion.div>
         </motion.div>
-      </motion.div>
+      )}
     </AnimatePresence>
   );
 }
