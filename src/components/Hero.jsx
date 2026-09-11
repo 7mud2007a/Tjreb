@@ -82,7 +82,7 @@ export default function Hero() {
           >
             <div className="cinematic-image relative mx-auto aspect-[4/5] w-full max-w-[620px] overflow-hidden rounded-[28px] border border-[#FFDB94]/15 sm:rounded-[34px]">
               <img
-                src="https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=1400&q=90"
+                src="/images/images.jpeg"
                 alt="تشكيلة شوكولا فاخرة من شوكولا غراوي"
                 className="h-full w-full object-cover"
               />
