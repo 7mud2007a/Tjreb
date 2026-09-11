@@ -68,7 +68,7 @@ export default function Footer() {
             href="https://aboudweb.onrender.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[10px] text-[#D8C8AE]/45 transition hover:text-[#FFDB94]"
+            className="text-[10px] text-[#FFF7E8] underline underline-offset-4 decoration-[#FFDB94]/40 transition hover:text-[#FFDB94]"
           >
             تصميم وتطوير Aboud Web
           </a>
