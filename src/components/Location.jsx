@@ -1,39 +1,72 @@
-import React from 'react';
-import { MapPin } from 'lucide-react';
-import { brandInfo } from '../data/chocolateData';
+import { motion } from "framer-motion";
+import { ExternalLink, MapPin } from "lucide-react";
+
+const latitude = 34.7356765;
+const longitude = 36.7004976;
+
+const mapUrl = `https://www.google.com/maps?q=${latitude},${longitude}&z=16&output=embed`;
+const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
 
 export default function Location() {
   return (
-    <section className="py-20 bg-gradient-to-b from-[#1A0F0B] to-[#23120B] relative">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8">
-        <div className="glass-panel p-8 sm:p-12 rounded-3xl border border-[#D4AF37]/30 space-y-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="space-y-2 text-center md:text-right">
-              <div className="inline-flex items-center gap-2 text-[#D4AF37] font-bold text-sm">
-                <MapPin className="w-5 h-5" />
-                <span>موقعنا في حمص</span>
+    <section className="bg-[#241006] pb-24 pt-8 sm:pb-28">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
+        <div className="grid gap-5 lg:grid-cols-[0.72fr_1.28fr]">
+
+          <motion.div
+            initial={{ opacity: 0, x: 35 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.75 }}
+            className="flex flex-col justify-between rounded-[24px] border border-[#FFDB94]/10 bg-[#3A1607]/45 p-6 text-right sm:p-8"
+          >
+            <div>
+              <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl border border-[#FFDB94]/15 bg-[#FFDB94]/5 text-[#FFDB94]">
+                <MapPin size={19} strokeWidth={1.5} />
               </div>
-              <h3 className="text-2xl sm:text-3xl font-bold text-[#FAF6EE] font-arabic">
-                تفضلوا بزيارتنا لتجربة تذوق مباشرة
-              </h3>
-              <p className="text-[#FAF6EE]/70 text-sm">
-                {brandInfo.location}
+
+              <p className="text-[9px] tracking-[0.2em] text-[#FFDB94]/55">
+                FIND US
+              </p>
+
+              <h2 className="mt-3 text-2xl font-medium text-[#FFF7E8]">
+                زورونا في حمص
+              </h2>
+
+              <p className="mt-4 text-sm leading-7 text-[#D8C8AE]/70">
+                شارع الغوطة بجانب دوار الغاردينيا
+                <br />
+                حمص – سوريا
               </p>
             </div>
-          </div>
 
-          {/* Embedded Google Map */}
-          <div className="w-full h-80 rounded-2xl overflow-hidden border border-[#D4AF37]/20 shadow-inner">
+            <a
+              href={directionsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="glass-button mt-8 w-full text-xs"
+            >
+              فتح الموقع على الخريطة
+              <ExternalLink size={15} strokeWidth={1.5} />
+            </a>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.9 }}
+            className="overflow-hidden rounded-[24px] border border-[#FFDB94]/10 bg-[#3A1607]"
+          >
             <iframe
-              title="موقع شوكولا غراوي - حمص شارع الغوطة"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3283.432123!2d36.713!3d34.73!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDQzJzgwLjAiTiAzNsKwNDInNDYuOCJF!5e0!3m2!1sar!2s!4v1620000000000!5m2!1sar!2s"
-              width="100%"
-              height="100%"
-              style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg)' }}
-              allowFullScreen=""
+              title="موقع شوكولا غراوي"
+              src={mapUrl}
+              className="h-[340px] w-full border-0 sm:h-[400px]"
               loading="lazy"
-            ></iframe>
-          </div>
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </motion.div>
+
         </div>
       </div>
     </section>
