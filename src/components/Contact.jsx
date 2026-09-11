@@ -1,67 +1,147 @@
-import React from 'react';
-import { Phone, MapPin, MessageCircle, Clock } from 'lucide-react';
-import { brandInfo } from '../data/chocolateData';
+import { motion } from "framer-motion";
+import { MapPin, Phone, MessageCircle, ArrowUpLeft } from "lucide-react";
+import { brandInfo } from "../data/chocolateData";
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-24 bg-[#1A0F0B] relative">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <span className="text-xs font-bold tracking-widest text-[#D4AF37] uppercase border border-[#D4AF37]/30 px-4 py-1.5 rounded-full bg-[#2A1810]/50">
-            تواصل معنا
-          </span>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-[#FAF6EE] font-arabic">
-            يسعدنا <span className="gold-text-gradient">خدمتكم واستقبال طلباتكم</span>
-          </h2>
-          <p className="text-[#FAF6EE]/70 text-base sm:text-lg">
-            فريقنا جاهز لمساعدتكم في اختيار وتنسيق أجمل قطع الشوكولا لمناسباتكم السعيدة.
-          </p>
-        </div>
+    <section
+      id="contact"
+      className="section-space overflow-hidden bg-[#632709]"
+    >
+      <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
+        <div className="grid items-stretch gap-8 lg:grid-cols-[1.05fr_0.95fr]">
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Phone Card */}
-          <div className="glass-card p-8 rounded-3xl text-center space-y-4 border border-[#D4AF37]/20 hover:border-[#D4AF37]/60">
-            <div className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-[#3D2318] to-[#1A0F0B] border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37] shadow-lg">
-              <Phone className="w-8 h-8" />
-            </div>
-            <h3 className="text-xl font-bold text-[#FAF6EE]">رقم الاتصال المباشر</h3>
-            <p className="text-[#FAF6EE]/70 text-sm">يسعدنا استقبال اتصالاتكم واستفساراتكم</p>
-            <a
-              href={`tel:${brandInfo.phoneRaw}`}
-              className="inline-block px-6 py-3 rounded-full bg-[#D4AF37] text-[#1A0F0B] font-bold text-lg dir-ltr hover:bg-[#F3E5AB] transition-colors"
-            >
-              {brandInfo.phone}
-            </a>
-          </div>
+          {/* Image */}
+          <motion.div
+            initial={{ opacity: 0, x: -50, scale: 0.96 }}
+            whileInView={{ opacity: 1, x: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{
+              duration: 0.9,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+            className="cinematic-image relative min-h-[420px] overflow-hidden rounded-[28px] border border-[#FFDB94]/10"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=1400&q=90"
+              alt="شوكولا غراوي"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
 
-          {/* Location Card */}
-          <div className="glass-card p-8 rounded-3xl text-center space-y-4 border border-[#D4AF37]/20 hover:border-[#D4AF37]/60">
-            <div className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-[#3D2318] to-[#1A0F0B] border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37] shadow-lg">
-              <MapPin className="w-8 h-8" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#241006]/80 via-[#241006]/15 to-transparent" />
+
+            <div className="absolute bottom-6 right-6 left-6">
+              <div className="glass-strong rounded-2xl p-5 text-right">
+                <p className="text-[9px] tracking-[0.25em] text-[#FFDB94]/60">
+                  GHRAOUI CHOCOLATE
+                </p>
+
+                <h3 className="mt-2 text-xl font-medium text-[#FFF7E8]">
+                  تفاصيل تستحق أن تُهدى
+                </h3>
+              </div>
             </div>
-            <h3 className="text-xl font-bold text-[#FAF6EE]">عنوان المحل</h3>
-            <p className="text-[#FAF6EE]/70 text-sm">أهلاً وسهلاً بكم في فرعنا</p>
-            <p className="text-[#D4AF37] font-semibold text-base">
-              {brandInfo.location}
+          </motion.div>
+
+          {/* Contact Information */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{
+              duration: 0.9,
+              delay: 0.08,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+            className="flex flex-col justify-center text-right"
+          >
+            <div className="mb-4 flex items-center justify-end gap-3">
+              <span className="h-px w-8 bg-[#FFDB94]/40" />
+
+              <span className="text-[10px] tracking-[0.2em] text-[#FFDB94]/65">
+                GET IN TOUCH
+              </span>
+            </div>
+
+            <h2 className="text-3xl font-medium leading-tight text-[#FFF7E8] sm:text-4xl">
+              دعنا نصنع
+              <br />
+              <span className="text-[#FFDB94]">تفاصيل مناسبتك</span>
+            </h2>
+
+            <p className="mt-5 max-w-md mr-auto text-sm leading-8 text-[#F2DFC2]/75">
+              أخبرنا بما تحتاجه، وسنساعدك في اختيار التشكيلة المناسبة
+              لمناسبتك.
             </p>
-          </div>
 
-          {/* WhatsApp Card */}
-          <div className="glass-card p-8 rounded-3xl text-center space-y-4 border border-[#D4AF37]/20 hover:border-[#D4AF37]/60">
-            <div className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-[#3D2318] to-[#1A0F0B] border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37] shadow-lg">
-              <MessageCircle className="w-8 h-8" />
+            <div className="mt-8 space-y-2">
+              {/* Phone */}
+              <a
+                href={`tel:${brandInfo.phoneRaw}`}
+                className="group flex items-center justify-between rounded-2xl border border-[#FFDB94]/10 bg-[#4A1D08]/35 px-5 py-4 transition-all duration-300 hover:border-[#FFDB94]/25 hover:bg-[#4A1D08]/55"
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#FFDB94]/15 bg-[#FFDB94]/5 text-[#FFDB94]">
+                  <Phone size={17} strokeWidth={1.5} />
+                </div>
+
+                <div>
+                  <p className="text-[9px] text-[#FFDB94]/50">
+                    اتصل بنا
+                  </p>
+                  <p className="mt-1 text-sm text-[#FFF7E8]">
+                    {brandInfo.phone}
+                  </p>
+                </div>
+              </a>
+
+              {/* Location */}
+              <div className="flex items-center justify-between rounded-2xl border border-[#FFDB94]/10 bg-[#4A1D08]/35 px-5 py-4">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#FFDB94]/15 bg-[#FFDB94]/5 text-[#FFDB94]">
+                  <MapPin size={17} strokeWidth={1.5} />
+                </div>
+
+                <div>
+                  <p className="text-[9px] text-[#FFDB94]/50">
+                    موقعنا
+                  </p>
+                  <p className="mt-1 text-sm text-[#FFF7E8]">
+                    {brandInfo.location}
+                  </p>
+                </div>
+              </div>
+
+              {/* WhatsApp */}
+              <a
+                href={brandInfo.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center justify-between rounded-2xl border border-[#FFDB94]/10 bg-[#4A1D08]/35 px-5 py-4 transition-all duration-300 hover:border-[#FFDB94]/25 hover:bg-[#4A1D08]/55"
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#FFDB94]/15 bg-[#FFDB94]/5 text-[#FFDB94]">
+                  <MessageCircle size={17} strokeWidth={1.5} />
+                </div>
+
+                <div>
+                  <p className="text-[9px] text-[#FFDB94]/50">
+                    واتساب
+                  </p>
+                  <p className="mt-1 text-sm text-[#FFF7E8]">
+                    تواصل معنا مباشرة
+                  </p>
+                </div>
+              </a>
             </div>
-            <h3 className="text-xl font-bold text-[#FAF6EE]">محادثة واتساب</h3>
-            <p className="text-[#FAF6EE]/70 text-sm">ارسل استفسارك أو طلبك مباشرة</p>
+
             <a
               href={brandInfo.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block px-6 py-3 rounded-full bg-[#25D366] text-white font-bold text-base hover:opacity-90 transition-opacity"
+              className="glass-button glass-button-primary mt-6 w-full text-xs sm:w-auto sm:self-end"
             >
-              تواصل عبر WhatsApp
+              اطلب عبر واتساب
+              <ArrowUpLeft size={16} strokeWidth={1.7} />
             </a>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
