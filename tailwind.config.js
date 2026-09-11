@@ -7,34 +7,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        chocolate: {
-          dark: "#1A0F0B",
-          deep: "#2A1810",
-          medium: "#3D2318",
-          light: "#5A3826",
-        },
-        cocoa: {
-          deep: "#140A07",
-          warm: "#23120B",
-        },
-        gold: {
-          champagne: "#D4AF37",
-          bright: "#F3E5AB",
-          soft: "#E6CA65",
-          dark: "#997A15",
-        },
-        cream: {
-          warm: "#FAF6EE",
-          soft: "#F3ECE1",
-          gold: "#EFE8D8",
-        },
+        chocolate: "#632709",
+        "chocolate-deep": "#3B1605",
+        "chocolate-dark": "#241006",
+        champagne: "#FFDB94",
+        cream: "#FFF7E8",
+        muted: "#D8C8AE",
       },
       fontFamily: {
-        arabic: ['Tajawal', 'Readex Pro', 'sans-serif'],
-      },
-      backgroundImage: {
-        'radial-gold': 'radial-gradient(circle, rgba(212,175,55,0.15) 0%, rgba(26,15,11,0) 70%)',
-        'gold-gradient': 'linear-gradient(135deg, #D4AF37 0%, #F3E5AB 50%, #997A15 100%)',
+        sans: ["Tajawal", "Readex Pro", "sans-serif"],
       },
     },
   },
