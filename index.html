@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Brand background</title>
+  <style>
+    /* The canvas itself is transparent — this is just the page colour behind it (Warm Ivory).
+       Keep the background on <html> only: the background layer sits at z-index:-1, behind <body>'s content. */
+    html { background: #EAE4D9; }
+    body { margin: 0; }
+  </style>
+</head>
+<body>
+  <script src="brand-background.js"></script>
+  <script>
+    // Fixed, full-viewport, behind everything. Options are optional, e.g. { speed: 0.8, clearing: 0.7 }.
+    var bg = new BrandBackground();
+  </script>
+</body>
+</html>
